@@ -1,0 +1,14 @@
+#include <iostream>
+#include <Windows.h>
+
+int main() {
+	// я хз как это работает
+
+	SetConsoleCP(65001);
+	SetConsoleOutputCP(65001);
+
+	std::cout << "Hello! How are you?!\n" << std::endl;
+	std::cout << "Привет!!";
+
+	return 0;
+}
