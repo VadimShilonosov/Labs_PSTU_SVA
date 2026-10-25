@@ -22,16 +22,16 @@ int main()
     double d_denominator = 10 * pow(c, 2) * pow(d, 3) + 5 * c * pow(d, 4) + pow(d, 5);
     double d_result = d_numerator / d_denominator;
 
-    cout << "result of double expression: " << d_result << endl;
+    cout << "result of double expression: " << d_result << endl << endl;
 
     int n = 10;
     int m = 20;
 
-    int result_1 = m++ n;
+    int result_1 = m++ + n;
     bool result_2 = (--n > m++);
     bool result_3 = (n-- < ++m);
 
-    cout << "Result 1: " << result_1 << enld << "Result 2: " << result_2 << endl << "Result 3: " << result_3 << endl;
+    cout << "Result 1: " << result_1 << endl << "Result 2: " << result_2 << endl << "Result 3: " << result_3 << endl;
     
     return 0;
 }
