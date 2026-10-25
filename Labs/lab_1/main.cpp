@@ -24,5 +24,14 @@ int main()
 
     cout << "result of double expression: " << d_result << endl;
 
+    int n = 10;
+    int m = 20;
+
+    int result_1 = m++ n;
+    bool result_2 = (--n > m++);
+    bool result_3 = (n-- < ++m);
+
+    cout << "Result 1: " << result_1 << enld << "Result 2: " << result_2 << endl << "Result 3: " << result_3 << endl;
+    
     return 0;
 }
