@@ -4,6 +4,8 @@
 
 using namespace std;
 
+//проверка на полиндром
+
 int main() {
     SetConsoleOutputCP(CP_UTF8);
 
