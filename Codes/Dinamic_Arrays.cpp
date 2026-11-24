@@ -4,34 +4,41 @@
 
 using namespace std;
 
-void printArray(const int* arr, int size, const string& label) 
+void printArray(const int* arr, int size, const string& title)
 {
-    cout << label << " (размер = " << size << "):" << endl;
-
+    cout << title << " (размер = " << size << "):" << endl;
     for (int i = 0; i < size; ++i) 
     {
-        if (i == 0)  cout << right << setw(3) << arr[i];
+        if (i == 0) cout << right << setw(3) << arr[i];
         else cout << "  " << right << setw(3) << arr[i];
     }
-    cout << endl << endl;
+    cout << "\n\n";
 }
 
-int* resizeArray(int* oldArr, int oldSize, int newSize) 
+void resizeArray(int*& arr, int& size, int newSize) 
 {
-    int* newArr = new int[newSize];
-    int elementsToCopy = (oldSize < newSize) ? oldSize : newSize;
+    //выделяем новую память в куче
+    int* tempArr = new int[newSize];
 
-    for (int i = 0; i < elementsToCopy; ++i) 
+    //копируем старые данные в новый массив
+    int limit = (size < newSize) ? size : newSize;
+    for (int i = 0; i < limit; ++i) 
     {
-        newArr[i] = oldArr[i];
-    }
-    for (int i = oldSize; i < newSize; ++i) 
-    {
-        newArr[i] = (i + 1) * 100;
+        tempArr[i] = arr[i];
     }
 
-    delete[] oldArr;
-    return newArr;
+    //дозаполняем новые ячейки
+    for (int i = size; i < newSize; ++i) 
+    {
+        tempArr[i] = (i + 1) * 100;
+    }
+
+    //удаляем старый массив
+    delete[] arr;
+
+    //меняем указатель и размер на новые
+    arr = tempArr;
+    size = newSize;
 }
 
 int main() 
@@ -39,17 +46,21 @@ int main()
     SetConsoleOutputCP(CP_UTF8);
 
     int size = 3;
-    int* arr = new int[size] {5, 42, 128};
-    printArray(arr, size, "1. Исходный массив");
+    int* arr = new int[size];
+    arr[0] = 5;
+    arr[1] = 42;
+    arr[2] = 128;
 
-    arr = resizeArray(arr, size, 6);
-    size = 6;
-    printArray(arr, size, "2. После увеличения");
+    printArray(arr, size, "1. Создан исходный массив");
 
-    arr = resizeArray(arr, size, 2);
-    size = 2;
-    printArray(arr, size, "3. После уменьшения");
+    resizeArray(arr, size, 6);
+    printArray(arr, size, "2. Массив увеличен");
 
+    resizeArray(arr, size, 2);
+    printArray(arr, size, "3. Массив уменьшен");
+
+    //удаляем массив после завершения кода
     delete[] arr;
+    arr = nullptr;
     return 0;
 }
